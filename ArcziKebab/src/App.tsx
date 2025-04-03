@@ -1,146 +1,326 @@
 import React from 'react';
-import { Menu, Phone, Clock, MapPin, Facebook, Instagram, Mail } from 'lucide-react';
+import { Menu, Phone, Clock, MapPin, Facebook, Instagram, Mail, Wifi, ShoppingBag, PartyPopper, Car, Umbrella, Accessibility, AirVent, Baby, ShoppingCart } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 function App() {
+  const fadeIn = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6 }
+  };
+
+  const staggerContainer = {
+    animate: {
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div 
+      <motion.div 
         className="h-screen bg-cover bg-center relative"
         style={{
           backgroundImage: 'url("https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&q=80")',
         }}
+        initial={{ scale: 1.1, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1 }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50">
           <div className="container mx-auto px-4 h-full flex flex-col justify-center items-center text-white">
-            <h1 className="text-5xl md:text-7xl font-bold mb-4">Arczikebab</h1>
-            <p className="text-xl md:text-2xl mb-8">Authentic Turkish Kebab in Warsaw</p>
-            <a 
+            <motion.h1 
+              className="text-6xl md:text-8xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-orange-500"
+              initial={{ y: -50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              Arczikebab
+            </motion.h1>
+            <motion.p 
+              className="text-xl md:text-2xl mb-8"
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              Authentic Turkish Kebab in Warsaw
+            </motion.p>
+            <motion.a 
               href="#menu" 
-              className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-colors"
+              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               View Menu
-            </a>
+            </motion.a>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Info Section */}
-      <div className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="flex items-center space-x-4 p-6 bg-white rounded-lg shadow-sm">
-            <Clock className="w-8 h-8 text-red-600" />
-            <div>
-              <h3 className="font-semibold">Opening Hours</h3>
-              <p>Mon-Sun: 11:00 - 23:00</p>
-            </div>
-          </div>
-          <div className="flex items-center space-x-4 p-6 bg-white rounded-lg shadow-sm">
-            <Phone className="w-8 h-8 text-red-600" />
-            <div>
-              <h3 className="font-semibold">Contact Us</h3>
-              <p>+48 123 456 789</p>
-            </div>
-          </div>
-          <div className="flex items-center space-x-4 p-6 bg-white rounded-lg shadow-sm">
-            <MapPin className="w-8 h-8 text-red-600" />
-            <div>
-              <h3 className="font-semibold">Location</h3>
-              <p>ul. Example 123, Warsaw</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Menu Section */}
-      <div id="menu" className="py-16">
+      {/* Menu Section - Moved to top */}
+      <motion.div 
+        id="menu" 
+        className="py-16 bg-gradient-to-b from-gray-50 to-white"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+        variants={staggerContainer}
+      >
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">Our Menu</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-red-800"
+            variants={fadeIn}
+          >
+            Our Menu
+          </motion.h2>
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={staggerContainer}
+          >
             {menuItems.map((item, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
-                <img 
-                  src={item.image} 
-                  alt={item.name}
-                  className="w-full h-48 object-cover"
-                />
+              <motion.div 
+                key={index}
+                className="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300"
+                variants={{
+                  initial: { opacity: 0, y: 20 },
+                  animate: { opacity: 1, y: 0 }
+                }}
+              >
+                <div className="relative">
+                  <img 
+                    src={item.image} 
+                    alt={item.name}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
+                </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">{item.name}</h3>
                   <p className="text-gray-600 mb-4">{item.description}</p>
-                  <p className="text-red-600 font-bold">{item.price} zł</p>
+                  <p className="text-red-600 font-bold text-lg">{item.price} zł</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Contact Section */}
-      <div id="contact" className="py-16 bg-gray-50">
+      {/* Reservation Section */}
+      <motion.div 
+        className="py-16 bg-white"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+        variants={fadeIn}
+      >
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">Contact Us</h2>
-          <div className="max-w-3xl mx-auto">
-            <div className="flex flex-col md:flex-row gap-8">
-              <div className="flex-1">
-                <form className="space-y-4">
-                  <input
-                    type="text"
-                    placeholder="Name"
-                    className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-red-600"
-                  />
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-red-600"
-                  />
-                  <textarea
-                    placeholder="Message"
-                    rows={4}
-                    className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-red-600"
-                  ></textarea>
-                  <button
-                    type="submit"
-                    className="w-full bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-red-800"
+            variants={fadeIn}
+          >
+            Make your reservation
+          </motion.h2>
+          <motion.div 
+            className="max-w-md mx-auto text-center"
+            variants={fadeIn}
+          >
+            <div className="mb-8 transform hover:scale-105 transition-transform duration-300">
+              <a href="tel:519764089" className="text-4xl font-bold text-red-600 hover:text-red-700 transition-colors">
+                519 764 089
+              </a>
+            </div>
+            <p className="text-gray-600 text-lg">Call us to make a reservation</p>
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Combined Services and Opening Hours Section */}
+      <motion.div 
+        className="py-16 bg-gradient-to-b from-gray-50 to-white"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+        variants={staggerContainer}
+      >
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12">
+            {/* Services Section */}
+            <div>
+              <motion.h2 
+                className="text-4xl md:text-5xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-red-800"
+                variants={fadeIn}
+              >
+                Our Services
+              </motion.h2>
+              <motion.div 
+                className="grid grid-cols-2 gap-6"
+                variants={staggerContainer}
+              >
+                {[
+                  { icon: Accessibility, label: "Accessible" },
+                  { icon: AirVent, label: "Air Conditioning" },
+                  { icon: Baby, label: "Kid's Corner" },
+                  { icon: Umbrella, label: "Outside Seating" },
+                  { icon: Car, label: "Self Parking" },
+                  { icon: PartyPopper, label: "Private Events" },
+                  { icon: ShoppingBag, label: "Takeaway" },
+                  { icon: Wifi, label: "Free WiFi" }
+                ].map((service, index) => (
+                  <motion.div 
+                    key={index}
+                    className="flex flex-col items-center text-center group"
+                    variants={{
+                      initial: { opacity: 0, y: 20 },
+                      animate: { opacity: 1, y: 0 }
+                    }}
+                    whileHover={{ scale: 1.05 }}
                   >
-                    Send Message
-                  </button>
-                </form>
-              </div>
-              <div className="flex-1">
-                <div className="h-full rounded-lg overflow-hidden">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d156388.35439805506!2d20.921111!3d52.233333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecc669a869f01%3A0x72f0be2a88ead3fc!2sWarsaw%2C%20Poland!5e0!3m2!1sen!2sus!4v1635959481000!5m2!1sen!2sus"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0, minHeight: '300px' }}
-                    allowFullScreen
-                    loading="lazy"
-                  ></iframe>
+                    <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-700 rounded-full flex items-center justify-center mb-4 group-hover:shadow-lg transition-shadow duration-300">
+                      {React.createElement(service.icon, { className: "w-8 h-8 text-white" })}
+                    </div>
+                    <h3 className="font-semibold">{service.label}</h3>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+
+            {/* Opening Hours Section */}
+            <div>
+              <motion.h2 
+                className="text-4xl md:text-5xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-red-800"
+                variants={fadeIn}
+              >
+                Opening Hours
+              </motion.h2>
+              <motion.div 
+                className="bg-white rounded-xl shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300"
+                variants={fadeIn}
+              >
+                <div className="p-6 space-y-4">
+                  {[
+                    { day: "Monday", hours: "11:00 AM - 11:00 PM" },
+                    { day: "Tuesday", hours: "11:00 AM - 11:00 PM" },
+                    { day: "Wednesday", hours: "11:00 AM - 11:00 PM" },
+                    { day: "Thursday", hours: "11:00 AM - 11:00 PM" },
+                    { day: "Friday", hours: "11:00 AM - 02:00 AM" },
+                    { day: "Saturday", hours: "11:00 AM - 02:00 AM" },
+                    { day: "Sunday", hours: "11:00 AM - 12:00 AM" }
+                  ].map((schedule, index) => (
+                    <motion.div 
+                      key={index}
+                      className="flex justify-between items-center p-2 hover:bg-gray-50 rounded-lg transition-colors duration-200"
+                      variants={{
+                        initial: { opacity: 0, x: -20 },
+                        animate: { opacity: 1, x: 0 }
+                      }}
+                    >
+                      <span className="font-semibold text-gray-800">{schedule.day}</span>
+                      <span className="text-gray-600">{schedule.hours}</span>
+                    </motion.div>
+                  ))}
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
+
+      {/* Everything at a glance Section */}
+      <motion.div 
+        id="contact" 
+        className="py-16 bg-white"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+        variants={staggerContainer}
+      >
+        <div className="container mx-auto px-4">
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-red-800"
+            variants={fadeIn}
+          >
+            Everything at a glance
+          </motion.h2>
+          <motion.div 
+            className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8"
+            variants={staggerContainer}
+          >
+            {[
+              {
+                icon: MapPin,
+                title: "Find us",
+                content: (
+                  <>
+                    <p>Gen Bema 2</p>
+                    <p>44-280 Rydułtowy</p>
+                    <p>Poland</p>
+                  </>
+                )
+              },
+              {
+                icon: Mail,
+                title: "E-mail us",
+                content: (
+                  <a href="mailto:arturpaprotny@op.pl" className="text-red-600 hover:text-red-700">
+                    arturpaprotny@op.pl
+                  </a>
+                )
+              },
+              {
+                icon: Phone,
+                title: "Call us",
+                content: (
+                  <a href="tel:+48519764089" className="text-red-600 hover:text-red-700">
+                    +48519764089
+                  </a>
+                )
+              }
+            ].map((item, index) => (
+              <motion.div 
+                key={index}
+                className="text-center p-6 bg-gradient-to-b from-gray-50 to-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:scale-105"
+                variants={{
+                  initial: { opacity: 0, y: 20 },
+                  animate: { opacity: 1, y: 0 }
+                }}
+              >
+                {React.createElement(item.icon, { className: "w-8 h-8 mx-auto mb-4 text-red-600" })}
+                <h3 className="font-bold mb-2 text-xl">{item.title}</h3>
+                {item.content}
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </motion.div>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
+      <footer className="bg-gradient-to-b from-gray-900 to-black text-white py-8">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-center md:text-left mb-4 md:mb-0">
-              <h3 className="text-2xl font-bold mb-2">Arczikebab</h3>
+              <h3 className="text-2xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-orange-500">
+                Arczikebab
+              </h3>
               <p>Authentic Turkish Kebab in Warsaw</p>
             </div>
             <div className="flex space-x-6">
-              <a href="#" className="hover:text-red-500 transition-colors">
-                <Facebook className="w-6 h-6" />
-              </a>
-              <a href="#" className="hover:text-red-500 transition-colors">
-                <Instagram className="w-6 h-6" />
-              </a>
-              <a href="#" className="hover:text-red-500 transition-colors">
-                <Mail className="w-6 h-6" />
-              </a>
+              {[
+                { icon: Facebook, href: "#" },
+                { icon: Instagram, href: "#" },
+                { icon: Mail, href: "#" }
+              ].map((social, index) => (
+                <motion.a
+                  key={index}
+                  href={social.href}
+                  className="hover:text-red-500 transition-colors"
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  {React.createElement(social.icon, { className: "w-6 h-6" })}
+                </motion.a>
+              ))}
             </div>
           </div>
           <div className="mt-8 text-center text-gray-400">
